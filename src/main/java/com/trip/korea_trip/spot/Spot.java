@@ -2,6 +2,9 @@ package com.trip.korea_trip.spot;
 
 import jakarta.persistence.*;
 
+/**
+ * uk : name-region
+ */
 @Entity
 @Table(name = "spots")
 public class Spot {
