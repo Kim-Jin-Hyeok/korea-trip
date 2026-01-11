@@ -2,7 +2,9 @@ package com.trip.korea_trip.spot.service;
 
 import com.trip.korea_trip.spot.Spot;
 import com.trip.korea_trip.spot.dto.request.SpotCreateReuqest;
+import com.trip.korea_trip.spot.dto.request.SpotUpdateRequest;
 import com.trip.korea_trip.spot.dto.response.SpotResponse;
+import com.trip.korea_trip.spot.exception.SpotNotFoundException;
 import com.trip.korea_trip.spot.repository.SpotRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,22 @@ public class SpotService {
         Spot saved = spotRepository.save(spot);
 
         return toResponse(saved);
+    }
+
+    @Transactional
+    public SpotResponse updateSpot(Long id, SpotUpdateRequest request) {
+        Spot spot = spotRepository.findById(id)
+                .orElseThrow(() -> new SpotNotFoundException("스팟을 찾을 수 없습니다. id = " + id));
+
+        spot.update(
+                request.getName(),
+                request.getRegion(),
+                request.getCategory(),
+                request.getAddress(),
+                request.getDescription()
+        );
+
+        return toResponse(spot);
     }
 
     @Transactional(readOnly = true)

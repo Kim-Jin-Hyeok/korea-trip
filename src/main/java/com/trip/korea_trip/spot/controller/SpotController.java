@@ -1,6 +1,7 @@
 package com.trip.korea_trip.spot.controller;
 
 import com.trip.korea_trip.spot.dto.request.SpotCreateReuqest;
+import com.trip.korea_trip.spot.dto.request.SpotUpdateRequest;
 import com.trip.korea_trip.spot.dto.response.SpotResponse;
 import com.trip.korea_trip.spot.service.SpotService;
 import jakarta.validation.Valid;
@@ -18,6 +19,11 @@ public class SpotController {
     @PostMapping
     public SpotResponse createSpot(@Valid @RequestBody SpotCreateReuqest request) {
         return spotService.createSpot(request);
+    }
+
+    @PutMapping("/{id}")
+    public SpotResponse updateSpot(@PathVariable Long id, @Valid @RequestBody SpotUpdateRequest request) {
+        return spotService.updateSpot(id, request);
     }
 
     @GetMapping

@@ -60,4 +60,12 @@ public class Spot {
     public Double getLatitude() { return latitude; }
     public Double getLongitude() { return longitude; }
     public String getDescription() { return description; }
+
+    public void update(String name, String region, String category, String address, String description) {
+        this.name = name;
+        this.region = region;
+        this.category = category;
+        this.address = address;
+        this.description = description;
+    }
 }
